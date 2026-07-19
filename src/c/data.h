@@ -71,3 +71,14 @@ Roll *data_roll_get(uint8_t index);  // index is storage order (0 = oldest)
 // Create a new roll for the given stock, stamped with the current time.
 // Returns the new roll's storage index, or -1 if the store is full.
 int data_roll_create(uint8_t stock_id);
+
+// Append a frame to a roll. Returns the new frame's storage index (0-based),
+// or -1 if the roll is full (MAX_FRAMES) or the roll index is invalid.
+int data_frame_add(uint8_t roll_index, Frame frame);
+
+// Overwrite an existing frame in place.
+void data_frame_update(uint8_t roll_index, uint8_t frame_index, Frame frame);
+
+// Build the starting values for a new frame: the roll's last frame if it has
+// one (carry-over), otherwise f/8, 1/125, and the stock's box ISO.
+Frame data_frame_default(uint8_t roll_index);

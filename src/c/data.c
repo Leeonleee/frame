@@ -172,3 +172,35 @@ int data_roll_create(uint8_t stock_id) {
   roll->created = time(NULL);
   return s_roll_count++;
 }
+
+int data_frame_add(uint8_t roll_index, Frame frame) {
+  Roll *roll = data_roll_get(roll_index);
+  if (!roll || roll->frame_count >= MAX_FRAMES) {
+    return -1;
+  }
+  uint8_t idx = roll->frame_count;
+  roll->frames[idx] = frame;
+  roll->frame_count++;
+  return idx;
+}
+
+void data_frame_update(uint8_t roll_index, uint8_t frame_index, Frame frame) {
+  Roll *roll = data_roll_get(roll_index);
+  if (!roll || frame_index >= roll->frame_count) {
+    return;
+  }
+  roll->frames[frame_index] = frame;
+}
+
+Frame data_frame_default(uint8_t roll_index) {
+  Roll *roll = data_roll_get(roll_index);
+  if (roll && roll->frame_count > 0) {
+    return roll->frames[roll->frame_count - 1];  // carry over last frame
+  }
+  Frame frame = {
+    .shutter_idx = SHUTTER_DEFAULT_IDX,
+    .aperture_idx = APERTURE_DEFAULT_IDX,
+    .iso_idx = roll ? data_stock_iso_idx(roll->stock_id) : 3,
+  };
+  return frame;
+}

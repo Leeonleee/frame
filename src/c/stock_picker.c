@@ -1,5 +1,6 @@
 #include "stock_picker.h"
 #include "data.h"
+#include "roll_window.h"
 
 static Window *s_window;
 static MenuLayer *s_menu_layer;
@@ -54,9 +55,10 @@ static void prv_select_click(MenuLayer *menu_layer, MenuIndex *cell_index,
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Created roll %d (%s)", roll_index,
           data_stock_name(stock_id));
 
-  // Return to the Roll List, which reloads and shows the new roll. Part 3
-  // will instead open the new roll's screen here.
-  window_stack_pop(true);
+  // Open the new roll's screen, then remove the picker from the stack so that
+  // Back from the roll lands on the Roll List, not back on the picker.
+  roll_window_push(roll_index);
+  window_stack_remove(s_window, false);
 }
 
 static void prv_window_load(Window *window) {

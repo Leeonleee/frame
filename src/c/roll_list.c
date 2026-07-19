@@ -1,6 +1,7 @@
 #include "roll_list.h"
 #include "data.h"
 #include "stock_picker.h"
+#include "roll_window.h"
 
 static Window *s_window;
 static MenuLayer *s_menu_layer;
@@ -62,9 +63,7 @@ static void prv_select_click(MenuLayer *menu_layer, MenuIndex *cell_index,
     stock_picker_window_push();
     return;
   }
-  // Part 2/3 opens the Roll screen for this roll.
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Roll %d selected",
-          prv_storage_index(cell_index->row));
+  roll_window_push(prv_storage_index(cell_index->row));
 }
 
 static void prv_select_long_click(MenuLayer *menu_layer, MenuIndex *cell_index,
