@@ -4,6 +4,7 @@
 #include "roll_window.h"
 #include "confirm.h"
 #include "theme.h"
+#include "settings.h"
 
 static Window *s_window;
 static MenuLayer *s_menu_layer;
@@ -52,7 +53,7 @@ static void prv_draw_row(GContext *ctx, const Layer *cell_layer,
   char date_buf[16];
   time_t created = roll->created;
   struct tm *tm = localtime(&created);
-  strftime(date_buf, sizeof(date_buf), "%d %b", tm);
+  strftime(date_buf, sizeof(date_buf), settings_date_strftime(), tm);
   snprintf(s_subtitle, sizeof(s_subtitle), "%s · %d frames", date_buf,
            roll->frame_count);
 
@@ -106,6 +107,12 @@ static void prv_window_load(Window *window) {
 static void prv_window_appear(Window *window) {
   // Reload when returning from the Stock Picker (or, later, a Roll screen) so
   // newly created or changed rolls show up.
+  if (s_menu_layer) {
+    menu_layer_reload_data(s_menu_layer);
+  }
+}
+
+void roll_list_refresh(void) {
   if (s_menu_layer) {
     menu_layer_reload_data(s_menu_layer);
   }

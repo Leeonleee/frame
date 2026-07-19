@@ -1,6 +1,7 @@
 #include "frame_editor.h"
 #include "data.h"
 #include "theme.h"
+#include "settings.h"
 
 typedef enum {
   FIELD_SHUTTER,
@@ -128,6 +129,9 @@ static void prv_select_long_click(ClickRecognizerRef recognizer,
     data_frame_add(s_roll_index, s_frame);
   } else {
     data_frame_update(s_roll_index, s_frame_index, s_frame);
+  }
+  if (settings_vibrate_on_save()) {
+    vibes_short_pulse();
   }
   window_stack_pop(true);  // back to the Roll screen, which reloads
 }

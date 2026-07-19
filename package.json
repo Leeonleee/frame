@@ -22,8 +22,12 @@
     "watchapp": {
       "watchface": false
     },
+    "capabilities": [
+      "configurable"
+    ],
     "messageKeys": [
-      "dummy"
+      "VIBRATE_ON_SAVE",
+      "DATE_FORMAT"
     ],
     "resources": {
       "media": []

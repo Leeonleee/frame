@@ -27,6 +27,8 @@ Pebble platforms.
   closing.
 - A colour interface themed for the Pebble Time family, which falls back to the
   classic black-and-white look on the 1-bit platforms.
+- Configurable from the Pebble phone app: toggle the save vibration and choose
+  the date format.
 
 ## Controls
 
@@ -50,6 +52,15 @@ Pebble platforms.
 - **Frame Editor** is where you set shutter, aperture, and ISO.
   Up and Down change the highlighted value, Select cycles through the fields,
   and holding Select saves.
+
+## Settings
+
+The app is configurable from the Pebble phone app (open the app list, tap the
+gear next to **frame**).
+The settings screen is served by the phone-side JavaScript in
+`src/pkjs/index.js` as a self-contained page, so nothing needs to be hosted.
+It offers a "Vibrate on save" toggle and a date-format choice; saving sends the
+values to the watch, which stores them and applies them immediately.
 
 ## Building and running
 
@@ -82,6 +93,8 @@ src/c/roll_window.{c,h}  A single roll's frame list
 src/c/frame_editor.{c,h} Shutter / aperture / ISO editor
 src/c/confirm.{c,h}      Reusable delete-confirmation dialog
 src/c/theme.{c,h}        Shared colour palette and themed UI helpers
+src/c/settings.{c,h}     Stores prefs received from the phone config screen
+src/pkjs/index.js        Phone-side JS: the settings/config screen
 package.json             Project metadata (UUID, platforms, resources)
 wscript                  Build rules
 ```
@@ -102,8 +115,8 @@ never touches the `persist_*` API directly.
 - [ ] Polish the Frame Editor layout on the round display (`chalk`).
 - [ ] Add an `ActionBarLayer` with icons to make the editor controls more
       discoverable.
-- [ ] In-app settings screen.
-- [ ] Export a roll as CSV (needs a PebbleKit JS companion on the phone).
+- [ ] Export a roll as CSV (the phone-side JS in `src/pkjs/index.js` is a good
+      home for this).
 - [ ] Custom / other film stock with a manual ISO.
 - [ ] Optional per-frame notes (lens, focal length, exposure compensation).
 - [ ] Optional 24 / 36 exposure count per roll.
