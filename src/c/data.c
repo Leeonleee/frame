@@ -148,36 +148,92 @@ int data_brand_stock_id(Brand brand, uint8_t row) {
 }
 
 // --- Roll store + persistence -----------------------------------------------
-// Persist layout: key 0 holds the roll count; key (index + 1) holds each roll's
-// struct blob. A Roll is well under PERSIST_DATA_MAX_LENGTH (256 bytes), so it
-// fits in a single value.
-#define PERSIST_KEY_COUNT 0
+// A full roll's frames (36 * 7 bytes = 252) fit in one persist value but a
+// combined roll blob would not, so each roll is stored as two values: a small
+// metadata value and a frames value, both under PERSIST_DATA_MAX_LENGTH (256).
+//
+// Persist layout:
+//   key 0            schema version (bumped when the layout changes)
+//   key 1            roll count
+//   key 2 + index*2  roll metadata (RollMeta)
+//   key 3 + index*2  roll frames (Frame[frame_count])
+#define PERSIST_KEY_VERSION 0
+#define PERSIST_KEY_COUNT 1
+#define PERSIST_SCHEMA_VERSION 2
 
 static Roll s_rolls[MAX_ROLLS];
 static uint8_t s_roll_count;
 
-static uint32_t prv_roll_key(uint8_t index) {
-  return index + 1;
+// The non-frame part of a roll, serialized on its own.
+typedef struct {
+  uint8_t stock_id;
+  uint8_t frame_count;
+  int32_t created;
+} RollMeta;
+
+// A full roll's frames must fit in a single persist value.
+_Static_assert(MAX_FRAMES * sizeof(Frame) <= PERSIST_DATA_MAX_LENGTH,
+               "frames value exceeds PERSIST_DATA_MAX_LENGTH");
+
+static uint32_t prv_meta_key(uint8_t index) {
+  return 2 + index * 2;
 }
 
-// Write one roll's blob to its key.
+static uint32_t prv_frames_key(uint8_t index) {
+  return 3 + index * 2;
+}
+
+// Write one roll's metadata and frames to its two keys.
 static void prv_save_roll(uint8_t index) {
-  persist_write_data(prv_roll_key(index), &s_rolls[index], sizeof(Roll));
+  Roll *roll = &s_rolls[index];
+  RollMeta meta = {
+    .stock_id = roll->stock_id,
+    .frame_count = roll->frame_count,
+    .created = roll->created,
+  };
+  persist_write_data(prv_meta_key(index), &meta, sizeof(meta));
+  if (roll->frame_count > 0) {
+    persist_write_data(prv_frames_key(index), roll->frames,
+                       roll->frame_count * sizeof(Frame));
+  } else {
+    persist_delete(prv_frames_key(index));
+  }
 }
 
-// Persist the count and every roll blob, and clear any stale trailing keys.
-// Used when the set of rolls changes (create/delete) and storage indices move.
+// Persist the count and every roll, and clear any stale trailing keys. Used
+// when the set of rolls changes (create/delete) and storage indices move.
 static void prv_save_all(void) {
   persist_write_int(PERSIST_KEY_COUNT, s_roll_count);
   for (uint8_t i = 0; i < s_roll_count; i++) {
     prv_save_roll(i);
   }
   for (uint8_t i = s_roll_count; i < MAX_ROLLS; i++) {
-    persist_delete(prv_roll_key(i));
+    persist_delete(prv_meta_key(i));
+    persist_delete(prv_frames_key(i));
+  }
+}
+
+// Remove every key this app owns, used to discard data from an older schema.
+static void prv_wipe(void) {
+  persist_delete(PERSIST_KEY_COUNT);
+  for (uint8_t i = 0; i < MAX_ROLLS; i++) {
+    persist_delete(prv_meta_key(i));
+    persist_delete(prv_frames_key(i));
   }
 }
 
 void data_load(void) {
+  int version = persist_exists(PERSIST_KEY_VERSION)
+                    ? persist_read_int(PERSIST_KEY_VERSION)
+                    : 0;
+  if (version != PERSIST_SCHEMA_VERSION) {
+    // Data (if any) is from an incompatible layout; start clean.
+    prv_wipe();
+    persist_write_int(PERSIST_KEY_VERSION, PERSIST_SCHEMA_VERSION);
+    s_roll_count = 0;
+    return;
+  }
+
   int count = persist_exists(PERSIST_KEY_COUNT)
                   ? persist_read_int(PERSIST_KEY_COUNT)
                   : 0;
@@ -188,8 +244,14 @@ void data_load(void) {
     count = MAX_ROLLS;
   }
   for (int i = 0; i < count; i++) {
-    if (persist_exists(prv_roll_key(i))) {
-      persist_read_data(prv_roll_key(i), &s_rolls[i], sizeof(Roll));
+    RollMeta meta = {0};
+    persist_read_data(prv_meta_key(i), &meta, sizeof(meta));
+    s_rolls[i].stock_id = meta.stock_id;
+    s_rolls[i].frame_count = meta.frame_count;
+    s_rolls[i].created = meta.created;
+    if (meta.frame_count > 0 && persist_exists(prv_frames_key(i))) {
+      persist_read_data(prv_frames_key(i), s_rolls[i].frames,
+                        meta.frame_count * sizeof(Frame));
     }
   }
   s_roll_count = count;
@@ -225,6 +287,7 @@ int data_frame_add(uint8_t roll_index, Frame frame) {
   if (!roll || roll->frame_count >= MAX_FRAMES) {
     return -1;
   }
+  frame.created = time(NULL);  // stamp the moment the frame is logged
   uint8_t idx = roll->frame_count;
   roll->frames[idx] = frame;
   roll->frame_count++;
@@ -244,12 +307,15 @@ void data_frame_update(uint8_t roll_index, uint8_t frame_index, Frame frame) {
 Frame data_frame_default(uint8_t roll_index) {
   Roll *roll = data_roll_get(roll_index);
   if (roll && roll->frame_count > 0) {
-    return roll->frames[roll->frame_count - 1];  // carry over last frame
+    Frame frame = roll->frames[roll->frame_count - 1];  // carry over last frame
+    frame.created = 0;  // stamped for real when the frame is added
+    return frame;
   }
   Frame frame = {
     .shutter_idx = SHUTTER_DEFAULT_IDX,
     .aperture_idx = APERTURE_DEFAULT_IDX,
     .iso_idx = roll ? data_stock_iso_idx(roll->stock_id) : 3,
+    .created = 0,
   };
   return frame;
 }

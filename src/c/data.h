@@ -13,10 +13,14 @@
 #define APERTURE_DEFAULT_IDX 5  // f/8
 #define SHUTTER_DEFAULT_IDX 8   // 1/125
 
-typedef struct {
+// Packed so a full roll's frames fit in one persist value (see data.c). Each
+// setting is an index into the tables below; `created` is the time_t captured
+// when the frame was logged, kept for future EXIF export.
+typedef struct __attribute__((__packed__)) {
   uint8_t shutter_idx;
   uint8_t aperture_idx;
   uint8_t iso_idx;
+  int32_t created;
 } Frame;
 
 typedef struct {

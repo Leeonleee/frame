@@ -88,8 +88,11 @@ wscript                  Build rules
 
 ## Data model
 
-Each setting is stored as a small index into a fixed table, so a frame is only
-three bytes and a whole roll fits in a single persistent-storage value.
+Each exposure setting is stored as a small index into a fixed table, and every
+frame also records the `time_t` it was logged (kept for future EXIF export).
+A roll is persisted as two values, its metadata and its packed frames array, so
+each stays under Pebble's 256-byte per-value limit; a schema-version key wipes
+incompatible older data on upgrade.
 Rolls are stored oldest-first and presented newest-first.
 Persistence lives entirely behind the data layer in `data.c`, so the screen code
 never touches the `persist_*` API directly.
