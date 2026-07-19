@@ -1,4 +1,4 @@
-# project  configured on Sun Jul 19 11:29:36 2026 by
+# project  configured on Sun Jul 19 11:56:56 2026 by
 # waf 2.1.4 (abi 20, python 30d0df0 on linux)
 # using /home/leonl/.pebble-sdk/SDKs/current/sdk-core/pebble/waf configure
 #
@@ -18,7 +18,7 @@ Found Pebble SDK for gabbro in:
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -427,14 +427,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for flint in:
 /home/leonl/.pebble-sdk/SDKs/current/sdk-core/pebble/flint
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -843,14 +843,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for emery in:
 /home/leonl/.pebble-sdk/SDKs/current/sdk-core/pebble/emery
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -1259,14 +1259,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for diorite in:
 /home/leonl/.pebble-sdk/SDKs/current/sdk-core/pebble/diorite
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -1675,14 +1675,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for chalk in:
 /home/leonl/.pebble-sdk/SDKs/current/sdk-core/pebble/chalk
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -2091,14 +2091,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for basalt in:
 /home/leonl/.pebble-sdk/SDKs/current/sdk-core/pebble/basalt
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -2507,14 +2507,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for aplite in:
 /home/leonl/.pebble-sdk/SDKs/current/sdk-core/pebble/aplite
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -2923,4 +2923,4 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', '/home/leonl/.config/Code/User/globalStorage/github.copilot-chat/copilotCli', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/leonl/.local/share/uv/tools/pebble-tool/lib/python3.13/site-packages/pebble_tool/commands/sdk', '/home/leonl/.pebble-sdk/SDKs/4.17/toolchain/bin', '/home/leonl/.local/bin', '/home/leonl/.nvm/versions/node/v20.20.2/bin', '/home/leonl/.local/bin', '/usr/local/bin', '/usr/bin', '/bin', '/usr/local/sbin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl', '/home/leonl/go/bin', '/home/leonl/go/bin'] var='AR' -> ['arm-none-eabi-ar']
