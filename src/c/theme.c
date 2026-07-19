@@ -29,10 +29,14 @@ void theme_draw_menu_header(GContext *ctx, const Layer *cell_layer,
   graphics_context_set_fill_color(ctx, THEME_CHROME_BG);
   graphics_fill_rect(ctx, bounds, 0, GCornerNone);
   graphics_context_set_text_color(ctx, THEME_CHROME_TEXT);
+  // Centered on round watches (where left-aligned text is clipped by the
+  // circular mask), left-aligned on rectangular ones.
+  int16_t inset = PBL_IF_ROUND_ELSE(0, 5);
   graphics_draw_text(ctx, title,
                      fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD),
-                     GRect(bounds.origin.x + 5, bounds.origin.y - 2,
-                           bounds.size.w - 10, bounds.size.h),
-                     GTextOverflowModeTrailingEllipsis, GTextAlignmentLeft,
+                     GRect(bounds.origin.x + inset, bounds.origin.y - 2,
+                           bounds.size.w - 2 * inset, bounds.size.h),
+                     GTextOverflowModeTrailingEllipsis,
+                     PBL_IF_ROUND_ELSE(GTextAlignmentCenter, GTextAlignmentLeft),
                      NULL);
 }

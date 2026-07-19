@@ -75,9 +75,10 @@ static void prv_draw_row(GContext *ctx, const Layer *cell_layer,
     // the text colour MenuLayer already set for this (possibly highlighted) row.
     GRect bounds = layer_get_bounds(cell_layer);
     const char *marker = (info.brand == s_expanded_brand) ? "-" : "+";
+    int16_t right = PBL_IF_ROUND_ELSE(44, 30);  // inset more on round
     graphics_draw_text(ctx, marker,
                        fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD),
-                       GRect(bounds.size.w - 30, (bounds.size.h - 32) / 2, 22,
+                       GRect(bounds.size.w - right, (bounds.size.h - 32) / 2, 22,
                              32),
                        GTextOverflowModeTrailingEllipsis, GTextAlignmentCenter,
                        NULL);

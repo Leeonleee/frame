@@ -64,9 +64,13 @@ static void prv_update_proc(Layer *layer, GContext *ctx) {
   const int16_t row_h = 44;
   const int16_t total = row_h * FIELD_COUNT;
   int16_t start_y = (bounds.size.h - total) / 2 - 8;
+  // Inset the rows on round watches so the label/value ends clear the circular
+  // mask; rectangular watches keep the tight margin.
+  const int16_t margin = PBL_IF_ROUND_ELSE(20, 6);
 
   for (int i = 0; i < FIELD_COUNT; i++) {
-    GRect row = GRect(6, start_y + i * row_h, bounds.size.w - 12, row_h - 6);
+    GRect row = GRect(margin, start_y + i * row_h,
+                      bounds.size.w - 2 * margin, row_h - 6);
     bool selected = (i == s_field);
 
     GColor text_color = THEME_TEXT;
@@ -92,11 +96,13 @@ static void prv_update_proc(Layer *layer, GContext *ctx) {
                        GTextAlignmentRight, NULL);
   }
 
-  // Discoverability hint for the save gesture.
+  // Discoverability hint for the save gesture, lifted toward the centre on
+  // round watches so its ends are not clipped.
   graphics_context_set_text_color(ctx, THEME_ACCENT);
   graphics_draw_text(ctx, "Hold SELECT to save",
                      fonts_get_system_font(FONT_KEY_GOTHIC_14),
-                     GRect(0, bounds.size.h - 22, bounds.size.w, 18),
+                     GRect(0, bounds.size.h - PBL_IF_ROUND_ELSE(38, 22),
+                           bounds.size.w, 18),
                      GTextOverflowModeTrailingEllipsis, GTextAlignmentCenter,
                      NULL);
 }
