@@ -1,5 +1,6 @@
 #include "frame_editor.h"
 #include "data.h"
+#include "theme.h"
 
 typedef enum {
   FIELD_SHUTTER,
@@ -10,6 +11,7 @@ typedef enum {
 
 static Window *s_window;
 static Layer *s_field_layer;
+static StatusBarLayer *s_status_bar;
 
 // Working state for the editor session.
 static uint8_t s_roll_index;
@@ -66,11 +68,11 @@ static void prv_update_proc(Layer *layer, GContext *ctx) {
     GRect row = GRect(6, start_y + i * row_h, bounds.size.w - 12, row_h - 6);
     bool selected = (i == s_field);
 
-    GColor text_color = GColorBlack;
+    GColor text_color = THEME_TEXT;
     if (selected) {
-      graphics_context_set_fill_color(ctx, GColorBlack);
+      graphics_context_set_fill_color(ctx, THEME_SELECT_BG);
       graphics_fill_rect(ctx, row, 6, GCornersAll);
-      text_color = GColorWhite;
+      text_color = THEME_SELECT_TEXT;
     }
     graphics_context_set_text_color(ctx, text_color);
 
@@ -90,7 +92,7 @@ static void prv_update_proc(Layer *layer, GContext *ctx) {
   }
 
   // Discoverability hint for the save gesture.
-  graphics_context_set_text_color(ctx, GColorDarkGray);
+  graphics_context_set_text_color(ctx, THEME_ACCENT);
   graphics_draw_text(ctx, "Hold SELECT to save",
                      fonts_get_system_font(FONT_KEY_GOTHIC_14),
                      GRect(0, bounds.size.h - 22, bounds.size.w, 18),
@@ -140,14 +142,17 @@ static void prv_click_config_provider(void *context) {
 // --- Window lifecycle -------------------------------------------------------
 static void prv_window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
-  GRect bounds = layer_get_bounds(window_layer);
 
-  s_field_layer = layer_create(bounds);
+  s_field_layer = layer_create(theme_content_bounds(window));
   layer_set_update_proc(s_field_layer, prv_update_proc);
   layer_add_child(window_layer, s_field_layer);
+
+  s_status_bar = theme_status_bar_create(window);
 }
 
 static void prv_window_unload(Window *window) {
+  status_bar_layer_destroy(s_status_bar);
+  s_status_bar = NULL;
   layer_destroy(s_field_layer);
   s_field_layer = NULL;
   window_destroy(s_window);
@@ -167,7 +172,7 @@ void frame_editor_push(uint8_t roll_index, int frame_index) {
   }
 
   s_window = window_create();
-  window_set_background_color(s_window, GColorWhite);
+  window_set_background_color(s_window, THEME_BG);
   window_set_click_config_provider(s_window, prv_click_config_provider);
   window_set_window_handlers(s_window, (WindowHandlers) {
     .load = prv_window_load,

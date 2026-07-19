@@ -1,4 +1,5 @@
 #include "confirm.h"
+#include "theme.h"
 
 static Window *s_window;
 static Layer *s_layer;
@@ -10,19 +11,33 @@ static void *s_context;
 
 static void prv_update_proc(Layer *layer, GContext *ctx) {
   GRect bounds = layer_get_bounds(layer);
-  graphics_context_set_text_color(ctx, GColorBlack);
 
   // The question, centered in the upper half.
+  graphics_context_set_text_color(ctx, THEME_TEXT);
   graphics_draw_text(ctx, s_message,
                      fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD),
-                     GRect(8, 34, bounds.size.w - 16, 80),
+                     GRect(10, 30, bounds.size.w - 20, 80),
                      GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
 
-  // Button hints along the bottom.
-  graphics_draw_text(ctx, "SELECT = Delete\nBACK = Cancel",
-                     fonts_get_system_font(FONT_KEY_GOTHIC_18),
-                     GRect(0, bounds.size.h - 52, bounds.size.w, 48),
-                     GTextOverflowModeWordWrap, GTextAlignmentCenter, NULL);
+  // A danger-coloured "Delete" button for the Select press.
+  GRect button = GRect(20, bounds.size.h - 62, bounds.size.w - 40, 34);
+  graphics_context_set_fill_color(ctx, THEME_DANGER_BG);
+  graphics_fill_rect(ctx, button, 8, GCornersAll);
+  graphics_context_set_text_color(ctx, THEME_DANGER_TEXT);
+  graphics_draw_text(ctx, "Delete",
+                     fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD),
+                     GRect(button.origin.x, button.origin.y + 4,
+                           button.size.w, button.size.h),
+                     GTextOverflowModeTrailingEllipsis, GTextAlignmentCenter,
+                     NULL);
+
+  // Cancel hint below.
+  graphics_context_set_text_color(ctx, THEME_ACCENT);
+  graphics_draw_text(ctx, "Back to cancel",
+                     fonts_get_system_font(FONT_KEY_GOTHIC_14),
+                     GRect(0, bounds.size.h - 24, bounds.size.w, 20),
+                     GTextOverflowModeTrailingEllipsis, GTextAlignmentCenter,
+                     NULL);
 }
 
 static void prv_select_click(ClickRecognizerRef recognizer, void *context) {
@@ -59,7 +74,7 @@ void confirm_window_push(const char *message, ConfirmCallback callback,
   s_context = context;
 
   s_window = window_create();
-  window_set_background_color(s_window, GColorWhite);
+  window_set_background_color(s_window, THEME_BG);
   window_set_click_config_provider(s_window, prv_click_config_provider);
   window_set_window_handlers(s_window, (WindowHandlers) {
     .load = prv_window_load,

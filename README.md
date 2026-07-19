@@ -25,6 +25,8 @@ Pebble platforms.
   fast.
 - Everything is saved to the watch's persistent storage and survives the app
   closing.
+- A colour interface themed for the Pebble Time family, which falls back to the
+  classic black-and-white look on the 1-bit platforms.
 
 ## Controls
 
@@ -79,6 +81,7 @@ src/c/stock_picker.{c,h} Film-stock chooser for a new roll
 src/c/roll_window.{c,h}  A single roll's frame list
 src/c/frame_editor.{c,h} Shutter / aperture / ISO editor
 src/c/confirm.{c,h}      Reusable delete-confirmation dialog
+src/c/theme.{c,h}        Shared colour palette and themed UI helpers
 package.json             Project metadata (UUID, platforms, resources)
 wscript                  Build rules
 ```

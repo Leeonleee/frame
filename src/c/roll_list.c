@@ -3,9 +3,11 @@
 #include "stock_picker.h"
 #include "roll_window.h"
 #include "confirm.h"
+#include "theme.h"
 
 static Window *s_window;
 static MenuLayer *s_menu_layer;
+static StatusBarLayer *s_status_bar;
 
 // The menu is a single section: one row per roll (newest first), then a final
 // "+ New Roll" row. Row index `count` is always the "+ New Roll" row.
@@ -31,7 +33,7 @@ static int16_t prv_get_header_height(MenuLayer *menu_layer,
 static void prv_draw_header(GContext *ctx, const Layer *cell_layer,
                             uint16_t section_index, void *context) {
   const char *title = (data_roll_count() == 0) ? "No rolls yet" : "Rolls";
-  menu_cell_basic_header_draw(ctx, cell_layer, title);
+  theme_draw_menu_header(ctx, cell_layer, title);
 }
 
 static void prv_draw_row(GContext *ctx, const Layer *cell_layer,
@@ -83,9 +85,9 @@ static void prv_select_long_click(MenuLayer *menu_layer, MenuIndex *cell_index,
 
 static void prv_window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
-  GRect bounds = layer_get_bounds(window_layer);
+  window_set_background_color(window, THEME_BG);
 
-  s_menu_layer = menu_layer_create(bounds);
+  s_menu_layer = menu_layer_create(theme_content_bounds(window));
   menu_layer_set_callbacks(s_menu_layer, NULL, (MenuLayerCallbacks) {
     .get_num_rows = prv_get_num_rows,
     .get_header_height = prv_get_header_height,
@@ -94,8 +96,11 @@ static void prv_window_load(Window *window) {
     .select_click = prv_select_click,
     .select_long_click = prv_select_long_click,
   });
+  theme_menu_colors(s_menu_layer);
   menu_layer_set_click_config_onto_window(s_menu_layer, window);
   layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
+
+  s_status_bar = theme_status_bar_create(window);
 }
 
 static void prv_window_appear(Window *window) {
@@ -107,6 +112,8 @@ static void prv_window_appear(Window *window) {
 }
 
 static void prv_window_unload(Window *window) {
+  status_bar_layer_destroy(s_status_bar);
+  s_status_bar = NULL;
   menu_layer_destroy(s_menu_layer);
   s_menu_layer = NULL;
 }
