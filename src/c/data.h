@@ -56,6 +56,11 @@ const char *data_stock_name(uint8_t stock_id);
 Brand data_stock_brand(uint8_t stock_id);
 uint8_t data_stock_iso_idx(uint8_t stock_id);  // box speed as an ISO index
 
+// Stocks grouped by brand, for the sectioned Stock Picker. Stocks are stored
+// contiguously by brand, so these iterate the table in order.
+uint8_t data_brand_stock_count(Brand brand);
+int data_brand_stock_id(Brand brand, uint8_t row);  // -1 if out of range
+
 // --- In-memory roll store ---------------------------------------------------
 // Part 1 keeps rolls in RAM only; persistence arrives in Part 5. Rolls are
 // stored oldest-first; the UI presents them newest-first.

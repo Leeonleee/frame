@@ -124,6 +124,29 @@ uint8_t data_stock_iso_idx(uint8_t stock_id) {
   return s_stocks[stock_id].iso_idx;
 }
 
+uint8_t data_brand_stock_count(Brand brand) {
+  uint8_t count = 0;
+  for (uint8_t i = 0; i < ARRAY_LENGTH(s_stocks); i++) {
+    if (s_stocks[i].brand == brand) {
+      count++;
+    }
+  }
+  return count;
+}
+
+int data_brand_stock_id(Brand brand, uint8_t row) {
+  uint8_t seen = 0;
+  for (uint8_t i = 0; i < ARRAY_LENGTH(s_stocks); i++) {
+    if (s_stocks[i].brand == brand) {
+      if (seen == row) {
+        return i;
+      }
+      seen++;
+    }
+  }
+  return -1;
+}
+
 // --- In-memory roll store ---------------------------------------------------
 static Roll s_rolls[MAX_ROLLS];
 static uint8_t s_roll_count;

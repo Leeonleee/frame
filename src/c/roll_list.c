@@ -1,5 +1,6 @@
 #include "roll_list.h"
 #include "data.h"
+#include "stock_picker.h"
 
 static Window *s_window;
 static MenuLayer *s_menu_layer;
@@ -58,8 +59,7 @@ static void prv_draw_row(GContext *ctx, const Layer *cell_layer,
 static void prv_select_click(MenuLayer *menu_layer, MenuIndex *cell_index,
                              void *context) {
   if (prv_is_new_roll_row(cell_index)) {
-    // Part 2 wires this to the Stock Picker.
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "New Roll selected");
+    stock_picker_window_push();
     return;
   }
   // Part 2/3 opens the Roll screen for this roll.
@@ -94,6 +94,14 @@ static void prv_window_load(Window *window) {
   layer_add_child(window_layer, menu_layer_get_layer(s_menu_layer));
 }
 
+static void prv_window_appear(Window *window) {
+  // Reload when returning from the Stock Picker (or, later, a Roll screen) so
+  // newly created or changed rolls show up.
+  if (s_menu_layer) {
+    menu_layer_reload_data(s_menu_layer);
+  }
+}
+
 static void prv_window_unload(Window *window) {
   menu_layer_destroy(s_menu_layer);
   s_menu_layer = NULL;
@@ -104,6 +112,7 @@ void roll_list_window_push(void) {
     s_window = window_create();
     window_set_window_handlers(s_window, (WindowHandlers) {
       .load = prv_window_load,
+      .appear = prv_window_appear,
       .unload = prv_window_unload,
     });
   }
