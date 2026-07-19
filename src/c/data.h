@@ -61,9 +61,12 @@ uint8_t data_stock_iso_idx(uint8_t stock_id);  // box speed as an ISO index
 uint8_t data_brand_stock_count(Brand brand);
 int data_brand_stock_id(Brand brand, uint8_t row);  // -1 if out of range
 
-// --- In-memory roll store ---------------------------------------------------
-// Part 1 keeps rolls in RAM only; persistence arrives in Part 5. Rolls are
-// stored oldest-first; the UI presents them newest-first.
+// --- Roll store -------------------------------------------------------------
+// Rolls are stored oldest-first in RAM and mirrored to persistent storage, so
+// they survive the app closing. The UI presents them newest-first.
+
+// Load all rolls from persistent storage. Call once at app launch.
+void data_load(void);
 
 uint8_t data_roll_count(void);
 Roll *data_roll_get(uint8_t index);  // index is storage order (0 = oldest)

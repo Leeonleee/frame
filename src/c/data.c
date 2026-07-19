@@ -147,9 +147,53 @@ int data_brand_stock_id(Brand brand, uint8_t row) {
   return -1;
 }
 
-// --- In-memory roll store ---------------------------------------------------
+// --- Roll store + persistence -----------------------------------------------
+// Persist layout: key 0 holds the roll count; key (index + 1) holds each roll's
+// struct blob. A Roll is well under PERSIST_DATA_MAX_LENGTH (256 bytes), so it
+// fits in a single value.
+#define PERSIST_KEY_COUNT 0
+
 static Roll s_rolls[MAX_ROLLS];
 static uint8_t s_roll_count;
+
+static uint32_t prv_roll_key(uint8_t index) {
+  return index + 1;
+}
+
+// Write one roll's blob to its key.
+static void prv_save_roll(uint8_t index) {
+  persist_write_data(prv_roll_key(index), &s_rolls[index], sizeof(Roll));
+}
+
+// Persist the count and every roll blob, and clear any stale trailing keys.
+// Used when the set of rolls changes (create/delete) and storage indices move.
+static void prv_save_all(void) {
+  persist_write_int(PERSIST_KEY_COUNT, s_roll_count);
+  for (uint8_t i = 0; i < s_roll_count; i++) {
+    prv_save_roll(i);
+  }
+  for (uint8_t i = s_roll_count; i < MAX_ROLLS; i++) {
+    persist_delete(prv_roll_key(i));
+  }
+}
+
+void data_load(void) {
+  int count = persist_exists(PERSIST_KEY_COUNT)
+                  ? persist_read_int(PERSIST_KEY_COUNT)
+                  : 0;
+  if (count < 0) {
+    count = 0;
+  }
+  if (count > MAX_ROLLS) {
+    count = MAX_ROLLS;
+  }
+  for (int i = 0; i < count; i++) {
+    if (persist_exists(prv_roll_key(i))) {
+      persist_read_data(prv_roll_key(i), &s_rolls[i], sizeof(Roll));
+    }
+  }
+  s_roll_count = count;
+}
 
 uint8_t data_roll_count(void) {
   return s_roll_count;
@@ -170,7 +214,10 @@ int data_roll_create(uint8_t stock_id) {
   roll->stock_id = stock_id;
   roll->frame_count = 0;
   roll->created = time(NULL);
-  return s_roll_count++;
+  int index = s_roll_count++;
+  prv_save_roll(index);
+  persist_write_int(PERSIST_KEY_COUNT, s_roll_count);
+  return index;
 }
 
 int data_frame_add(uint8_t roll_index, Frame frame) {
@@ -181,6 +228,7 @@ int data_frame_add(uint8_t roll_index, Frame frame) {
   uint8_t idx = roll->frame_count;
   roll->frames[idx] = frame;
   roll->frame_count++;
+  prv_save_roll(roll_index);
   return idx;
 }
 
@@ -190,6 +238,7 @@ void data_frame_update(uint8_t roll_index, uint8_t frame_index, Frame frame) {
     return;
   }
   roll->frames[frame_index] = frame;
+  prv_save_roll(roll_index);
 }
 
 Frame data_frame_default(uint8_t roll_index) {
@@ -213,6 +262,7 @@ void data_roll_delete(uint8_t roll_index) {
     s_rolls[i] = s_rolls[i + 1];
   }
   s_roll_count--;
+  prv_save_all();  // storage indices shifted, so rewrite everything
 }
 
 void data_frame_delete(uint8_t roll_index, uint8_t frame_index) {
@@ -224,4 +274,5 @@ void data_frame_delete(uint8_t roll_index, uint8_t frame_index) {
     roll->frames[i] = roll->frames[i + 1];
   }
   roll->frame_count--;
+  prv_save_roll(roll_index);
 }

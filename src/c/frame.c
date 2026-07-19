@@ -1,7 +1,9 @@
 #include <pebble.h>
+#include "data.h"
 #include "roll_list.h"
 
 static void prv_init(void) {
+  data_load();
   roll_list_window_push();
 }
 
