@@ -82,3 +82,9 @@ void data_frame_update(uint8_t roll_index, uint8_t frame_index, Frame frame);
 // Build the starting values for a new frame: the roll's last frame if it has
 // one (carry-over), otherwise f/8, 1/125, and the stock's box ISO.
 Frame data_frame_default(uint8_t roll_index);
+
+// Delete a whole roll, shifting later rolls down to fill the gap.
+void data_roll_delete(uint8_t roll_index);
+
+// Delete a single frame from a roll, shifting later frames down.
+void data_frame_delete(uint8_t roll_index, uint8_t frame_index);

@@ -2,6 +2,7 @@
 #include "data.h"
 #include "stock_picker.h"
 #include "roll_window.h"
+#include "confirm.h"
 
 static Window *s_window;
 static MenuLayer *s_menu_layer;
@@ -66,14 +67,18 @@ static void prv_select_click(MenuLayer *menu_layer, MenuIndex *cell_index,
   roll_window_push(prv_storage_index(cell_index->row));
 }
 
+static void prv_confirm_delete_roll(void *context) {
+  data_roll_delete((uint8_t)(uintptr_t)context);
+}
+
 static void prv_select_long_click(MenuLayer *menu_layer, MenuIndex *cell_index,
                                   void *context) {
   if (prv_is_new_roll_row(cell_index)) {
     return;
   }
-  // Part 4 wires this to the delete-confirm dialog.
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Delete roll %d requested",
-          prv_storage_index(cell_index->row));
+  uint8_t storage_index = prv_storage_index(cell_index->row);
+  confirm_window_push("Delete this roll?", prv_confirm_delete_roll,
+                      (void *)(uintptr_t)storage_index);
 }
 
 static void prv_window_load(Window *window) {

@@ -1,6 +1,7 @@
 #include "roll_window.h"
 #include "data.h"
 #include "frame_editor.h"
+#include "confirm.h"
 
 static Window *s_window;
 static MenuLayer *s_menu_layer;
@@ -66,14 +67,18 @@ static void prv_select_click(MenuLayer *menu_layer, MenuIndex *cell_index,
   frame_editor_push(s_roll_index, prv_frame_storage_index(cell_index->row));
 }
 
+static void prv_confirm_delete_frame(void *context) {
+  data_frame_delete(s_roll_index, (uint8_t)(uintptr_t)context);
+}
+
 static void prv_select_long_click(MenuLayer *menu_layer, MenuIndex *cell_index,
                                   void *context) {
   if (prv_is_add_row(cell_index)) {
     return;
   }
-  // Part 4 wires this to the delete-confirm dialog.
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Delete frame %d requested",
-          prv_frame_storage_index(cell_index->row));
+  uint8_t frame_index = prv_frame_storage_index(cell_index->row);
+  confirm_window_push("Delete this frame?", prv_confirm_delete_frame,
+                      (void *)(uintptr_t)frame_index);
 }
 
 static void prv_window_appear(Window *window) {

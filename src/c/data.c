@@ -204,3 +204,24 @@ Frame data_frame_default(uint8_t roll_index) {
   };
   return frame;
 }
+
+void data_roll_delete(uint8_t roll_index) {
+  if (roll_index >= s_roll_count) {
+    return;
+  }
+  for (uint8_t i = roll_index; i + 1 < s_roll_count; i++) {
+    s_rolls[i] = s_rolls[i + 1];
+  }
+  s_roll_count--;
+}
+
+void data_frame_delete(uint8_t roll_index, uint8_t frame_index) {
+  Roll *roll = data_roll_get(roll_index);
+  if (!roll || frame_index >= roll->frame_count) {
+    return;
+  }
+  for (uint8_t i = frame_index; i + 1 < roll->frame_count; i++) {
+    roll->frames[i] = roll->frames[i + 1];
+  }
+  roll->frame_count--;
+}
